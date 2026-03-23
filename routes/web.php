@@ -47,6 +47,10 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('borrowers', App\Http\Controllers\BorrowerController::class);
     
     // Loans
+    Route::get('/loans/search', [App\Http\Controllers\LoanController::class, 'search'])->name('loans.search');
+    Route::get('/loans/quick-create', [App\Http\Controllers\LoanController::class, 'quickCreate'])->name('loans.quick-create');
+    Route::post('/loans/quick-store', [App\Http\Controllers\LoanController::class, 'quickStore'])->name('loans.quick-store');
+    Route::get('/loans/statistics', [App\Http\Controllers\LoanController::class, 'statistics'])->name('loans.statistics');
     Route::resource('loans', App\Http\Controllers\LoanController::class);
     Route::post('/loans/{loan}/return', [App\Http\Controllers\LoanController::class, 'returnBook'])->name('loans.return');
 });

@@ -42,10 +42,11 @@
                             <p class="text-gray-600">Keep track of who has your books</p>
                             <div class="mt-2 text-sm text-blue-600 hover:text-blue-800">View Borrowers →</div>
                         </a>
-                        <div class="bg-white p-6 rounded-lg shadow">
+                        <a href="{{ route('loans.index') }}" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">📋 Loans</h3>
                             <p class="text-gray-600">View lending history and current loans</p>
-                        </div>
+                            <div class="mt-2 text-sm text-blue-600 hover:text-blue-800">View Loans →</div>
+                        </a>
                     </div>
                 </div>
             </div>
