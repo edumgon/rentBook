@@ -35,8 +35,11 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::post('/tenant-test/create', [App\Http\Controllers\TenantTestController::class, 'createSampleData'])->name('tenant.test.create');
     
     // Books
-    Route::resource('books', App\Http\Controllers\BookController::class);
     Route::get('/books/search', [App\Http\Controllers\BookController::class, 'search'])->name('books.search');
+    Route::get('/books/search-by-isbn', [App\Http\Controllers\BookController::class, 'searchByIsbn'])->name('books.search-by-isbn');
+    Route::get('/books/details', [App\Http\Controllers\BookController::class, 'getDetails'])->name('books.details');
+    Route::post('/books/import', [App\Http\Controllers\BookController::class, 'importFromApi'])->name('books.import');
+    Route::resource('books', App\Http\Controllers\BookController::class);
     
     // Borrowers
     Route::resource('borrowers', App\Http\Controllers\BorrowerController::class);
