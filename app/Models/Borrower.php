@@ -69,4 +69,20 @@ class Borrower extends Model
     {
         return $this->hasMany(Loan::class)->whereNull('return_date');
     }
+
+    /**
+     * Get loans count for statistics.
+     */
+    public function getActiveLoansCountAttribute()
+    {
+        return $this->activeLoans()->count();
+    }
+
+    /**
+     * Get total loans count for statistics.
+     */
+    public function getTotalLoansCountAttribute()
+    {
+        return $this->loans()->count();
+    }
 }

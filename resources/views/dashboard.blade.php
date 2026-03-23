@@ -37,10 +37,11 @@
                             <p class="text-gray-600">Manage your personal book collection</p>
                             <div class="mt-2 text-sm text-blue-600 hover:text-blue-800">View Books →</div>
                         </a>
-                        <div class="bg-white p-6 rounded-lg shadow">
+                        <a href="{{ route('borrowers.index') }}" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">👥 Borrowers</h3>
                             <p class="text-gray-600">Keep track of who has your books</p>
-                        </div>
+                            <div class="mt-2 text-sm text-blue-600 hover:text-blue-800">View Borrowers →</div>
+                        </a>
                         <div class="bg-white p-6 rounded-lg shadow">
                             <h3 class="text-lg font-semibold text-gray-900 mb-2">📋 Loans</h3>
                             <p class="text-gray-600">View lending history and current loans</p>

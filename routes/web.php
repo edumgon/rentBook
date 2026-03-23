@@ -42,6 +42,8 @@ Route::middleware(['auth', 'tenant'])->group(function () {
     Route::resource('books', App\Http\Controllers\BookController::class);
     
     // Borrowers
+    Route::get('/borrowers/search', [App\Http\Controllers\BorrowerController::class, 'search'])->name('borrowers.search');
+    Route::get('/borrowers/statistics', [App\Http\Controllers\BorrowerController::class, 'statistics'])->name('borrowers.statistics');
     Route::resource('borrowers', App\Http\Controllers\BorrowerController::class);
     
     // Loans

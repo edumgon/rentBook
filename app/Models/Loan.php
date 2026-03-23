@@ -84,6 +84,14 @@ class Loan extends Model
     }
 
     /**
+     * Get the borrower name (handles deleted borrowers).
+     */
+    public function getBorrowerNameAttribute()
+    {
+        return $this->borrower ? $this->borrower->name : 'Deleted Borrower';
+    }
+
+    /**
      * Check if the loan is currently active.
      */
     public function isActive(): bool
