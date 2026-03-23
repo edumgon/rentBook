@@ -23,6 +23,9 @@ Route::get('/auth/{provider}', [App\Http\Controllers\Auth\LoginController::class
 Route::get('/auth/{provider}/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleProviderCallback'])->name('auth.callback');
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
+// Test login for development (only works in local environment)
+Route::get('/test-login', [App\Http\Controllers\Auth\TestLoginController::class, 'testLogin']);
+
 // Protected routes
 Route::middleware(['auth', 'tenant'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');

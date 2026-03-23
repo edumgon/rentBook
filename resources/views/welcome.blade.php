@@ -18,7 +18,26 @@
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Get Started</h2>
                 <p class="text-gray-600 mb-6">Sign in to manage your book collection and track lending.</p>
                 
+                @if(session('error'))
+                    <div class="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                
+                @if(session('success'))
+                    <div class="mb-4 p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                
                 <div class="space-y-3">
+                    @if(app()->environment('local'))
+                        <a href="/test-login" 
+                           class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            🧪 Test Login (Development Only)
+                        </a>
+                        <div class="text-center text-sm text-gray-500 my-2">Or use social login:</div>
+                    @endif
                     <a href="{{ route('auth.redirect', 'google') }}" 
                        class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
