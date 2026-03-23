@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
+use App\Services\TenantService;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'tenant_id',
         'name',
         'email',
         'provider',
@@ -55,6 +57,7 @@ class User extends Authenticatable
                 'provider_id' => $socialiteUser->getId(),
             ],
             [
+                'tenant_id' => TenantService::generateTenantId(),
                 'name' => $socialiteUser->getName(),
                 'email' => $socialiteUser->getEmail(),
             ]

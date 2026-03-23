@@ -30,6 +30,10 @@ Route::get('/test-login', [App\Http\Controllers\Auth\TestLoginController::class,
 Route::middleware(['auth', 'tenant'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
     
+    // Tenant testing (local only)
+    Route::get('/tenant-test', [App\Http\Controllers\TenantTestController::class, 'index'])->name('tenant.test');
+    Route::post('/tenant-test/create', [App\Http\Controllers\TenantTestController::class, 'createSampleData'])->name('tenant.test.create');
+    
     // Books
     Route::resource('books', App\Http\Controllers\BookController::class);
     Route::get('/books/search', [App\Http\Controllers\BookController::class, 'search'])->name('books.search');

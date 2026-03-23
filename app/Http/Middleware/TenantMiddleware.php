@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\TenantService;
 
 class TenantMiddleware
 {
@@ -20,10 +21,7 @@ class TenantMiddleware
         // Set tenant context for the authenticated user
         if (Auth::check()) {
             $user = Auth::user();
-            
-            // Here you would typically set the tenant context
-            // For now, we'll just continue - this will be implemented later
-            // when we create the multi-tenant system
+            TenantService::setTenantContext($user->tenant_id);
         }
 
         return $next($request);
