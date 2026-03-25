@@ -1,34 +1,43 @@
----
-deployment:
+# cPanel Git Deployment Configuration for Laravel Book Lending Application
+# Official cPanel Git deployment format
+# https://docs.cpanel.net/knowledge-base/web-services/guide-to-git-deployment/
+
+--- deployment:
   tasks:
-    # Copy all Laravel application files to the deployment directory
-    - /bin/cp -R app $DEPLOYPATH
-    - /bin/cp -R bootstrap $DEPLOYPATH
-    - /bin/cp -R config $DEPLOYPATH
-    - /bin/cp -R database $DEPLOYPATH
-    - /bin/cp -R public $DEPLOYPATH
-    - /bin/cp -R resources $DEPLOYPATH
-    - /bin/cp -R routes $DEPLOYPATH
-    - /bin/cp -R storage $DEPLOYPATH
-    - /bin/cp    artisan $DEPLOYPATH
-    - /bin/cp    composer.json $DEPLOYPATH
-    - /bin/cp    composer.lock $DEPLOYPATH
-
-    # Install PHP dependencies (no dev, optimized for production)
-    - export PATH=/usr/local/bin:$PATH
-    - cd $DEPLOYPATH && composer install --optimize-autoloader --no-dev
-
-    # Cache Laravel config, routes and views for performance
-    - cd $DEPLOYPATH && php artisan config:cache
-    - cd $DEPLOYPATH && php artisan route:cache
-    - cd $DEPLOYPATH && php artisan view:cache
-
-    # Run database migrations
-    - cd $DEPLOYPATH && php artisan migrate --force
-
-    # Set correct permissions for storage and cache
-    - chmod -R 775 $DEPLOYPATH/storage
-    - chmod -R 775 $DEPLOYPATH/bootstrap/cache
-
-    # Create storage symlink for public uploads
-    - cd $DEPLOYPATH && php artisan storage:link
+    # Deploy Laravel files to current directory (relative path)
+    # This assumes the repository is cloned into the target directory
+    
+    # Copy Laravel files (excluding development files)
+    - /bin/cp -R app ./
+    - /bin/cp -R bootstrap ./
+    - /bin/cp -R config ./
+    - /bin/cp -R database ./
+    - /bin/cp -R lang ./
+    - /bin/cp -R public ./
+    - /bin/cp -R resources ./
+    - /bin/cp -R routes ./
+    - /bin/cp -R storage ./
+    - /bin/cp -R vendor ./
+    - /bin/cp artisan ./
+    - /bin/cp composer.json ./
+    - /bin/cp composer.lock ./
+    - /bin/cp .env.example ./
+    
+    # Set proper permissions
+    - /bin/chmod -R 755 storage bootstrap/cache
+    - /bin/chmod 644 .env.example
+    
+    # Laravel optimization commands
+    - /usr/local/bin/php artisan config:clear
+    - /usr/local/bin/php artisan config:cache
+    - /usr/local/bin/php artisan route:clear
+    - /usr/local/bin/php artisan route:cache
+    - /usr/local/bin/php artisan view:clear
+    - /usr/local/bin/php artisan view:cache
+    - /usr/local/bin/php artisan migrate --force
+    
+    # Create storage directories if they don't exist
+    - /bin/mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs
+    
+    # Set writable permissions for storage
+    - /bin/chmod -R 755 storage bootstrap/cache
