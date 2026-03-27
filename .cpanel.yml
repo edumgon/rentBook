@@ -1,27 +1,19 @@
 # cPanel Git Deployment Configuration for Laravel Book Lending Application
 # Official cPanel Git deployment format
-# https://docs.cpanel.net/knowledge-base/web-services/guide-to-git-deployment/
+# https:/docs.cpanel.net/knowledge-base/web-services/guide-to-git-deployment/
 
 --- deployment:
   tasks:
-    # Deploy Laravel files to current directory (relative path)
-    # This assumes the repository is cloned into the target directory
-    
-    # Copy Laravel files (excluding development files)
-    - /bin/cp -R app ./
-    - /bin/cp -R bootstrap ./
-    - /bin/cp -R config ./
-    - /bin/cp -R database ./
-    - /bin/cp -R lang ./
-    - /bin/cp -R public ./
-    - /bin/cp -R resources ./
-    - /bin/cp -R routes ./
-    - /bin/cp -R storage ./
-    - /bin/cp -R vendor ./
-    - /bin/cp artisan ./
-    - /bin/cp composer.json ./
-    - /bin/cp composer.lock ./
-    - /bin/cp .env.example ./
+    - /bin/mkdir -p ../public_html/rentbook.infoeg.com.br
+    - /bin/cp -R ../rentBook/* ../public_html/rentbook.infoeg.com.br/
+    - /bin/cp -R ../rentBook/public ../public_html/rentbook.infoeg.com.br/public
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/composer.phar install --no-dev --optimize-autoloader
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan key:generate --force
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan migrate --force
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan config:cache
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan route:cache
+    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan view:cache
+    - /bin/chmod -R 755 ../public_html/rentbook.infoeg.com.br/storage ../public_html/rentbook.infoeg.com.br/bootstrap/cache
     
     # Set proper permissions
     - /bin/chmod -R 755 storage bootstrap/cache
