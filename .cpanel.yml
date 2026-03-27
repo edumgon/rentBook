@@ -1,26 +1,23 @@
-# cPanel Git Deployment Configuration for Laravel Book Lending Application
-# Official cPanel Git deployment format
-# https:/docs.cpanel.net/knowledge-base/web-services/guide-to-git-deployment/
-
 --- 
 deployment:
   tasks:
-    - /bin/cp -R ../rentBook/public ../public_html/rentbook.infoeg.com.br
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/composer.phar install --no-dev --optimize-autoloader
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan key:generate --force
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan migrate --force
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan config:cache
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan route:cache
-    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan view:cache
-    
-    # Set proper permissions
-    - /bin/chmod -R 755 storage bootstrap/cache
-    
-    # Laravel optimization commands
-    - /usr/local/bin/php artisan config:clear
-    - /usr/local/bin/php artisan config:cache
-    - /usr/local/bin/php artisan route:clear
-    - /usr/local/bin/php artisan route:cache
-    - /usr/local/bin/php artisan view:clear
-    - /usr/local/bin/php artisan view:cache
-    - /usr/local/bin/php artisan migrate --force
+    - /usr/bin/php -r "echo 'ok';"
+#    - /bin/cp -R ../rentBook/public ../public_html/rentbook.infoeg.com.br
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/composer.phar install --no-dev --optimize-autoloader
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan key:generate --force
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan migrate --force
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan config:cache
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan route:cache
+#    - /usr/local/bin/php ../public_html/rentbook.infoeg.com.br/artisan view:cache
+#    
+#    # Set proper permissions
+#    - /bin/chmod -R 755 storage bootstrap/cache
+#    
+#    # Laravel optimization commands
+#    - /usr/local/bin/php artisan config:clear
+#    - /usr/local/bin/php artisan config:cache
+#    - /usr/local/bin/php artisan route:clear
+#    - /usr/local/bin/php artisan route:cache
+#    - /usr/local/bin/php artisan view:clear
+#    - /usr/local/bin/php artisan view:cache
+#    - /usr/local/bin/php artisan migrate --force
